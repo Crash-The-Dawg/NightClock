@@ -3011,7 +3011,10 @@ int main() {
     int      prevMin   = -1;
     bool     halfHourTriggered = false;
 
-    while (aptMainLoop()) {
+    for (;;) {
+        aptSetSleepAllowed(!(alarmCfg.enabled || (alarmRinging && !ringSourceIsTimer)));
+        if (!aptMainLoop()) break;
+
         if (aptShouldJumpToHome()) {
             aptJumpToHomeMenu();
         }
@@ -3128,6 +3131,7 @@ int main() {
         C3D_FrameEnd(C3D_FRAME_SYNCDRAW);
     }
 
+    aptSetSleepAllowed(true);
     if (settingsDirty) saveSettings();
     records.totalTimeSeconds += sessionFrames / 60;
     saveRecords(); // sempre, perché la riga sopra aggiorna comunque il tempo della sessione corrente
