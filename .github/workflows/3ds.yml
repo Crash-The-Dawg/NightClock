@@ -1,0 +1,55 @@
+name: Build NightClock
+
+on:
+  push:
+    branches: [main, feature/alarm-in-standby]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: devkitpro/devkitarm:latest
+      options: --user root
+    env:
+      DEVKITPRO: /opt/devkitpro
+      DEVKITARM: /opt/devkitpro/devkitARM
+      PATH: /opt/devkitpro/tools/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install 3DS libraries
+        run: dkp-pacman -S --needed --noconfirm 3ds-dev
+
+      - name: Install CIA tools
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p /opt/devkitpro/tools/bin
+          curl -fL https://github.com/3DSGuy/Project_CTR/releases/download/makerom-v0.18.4/makerom-v0.18.4-ubuntu_x86_64.zip -o /tmp/makerom.zip
+          unzip -j /tmp/makerom.zip -d /opt/devkitpro/tools/bin
+          chmod +x /opt/devkitpro/tools/bin/makerom
+          curl -fL https://github.com/Epicpkmn11/bannertool/releases/download/v1.2.2/bannertool.zip -o /tmp/bannertool.zip
+          unzip -p /tmp/bannertool.zip linux-x86_64/bannertool > /opt/devkitpro/tools/bin/bannertool
+          chmod +x /opt/devkitpro/tools/bin/bannertool
+
+      - name: Build 3DSX and CIA
+        shell: bash
+        run: |
+          set -euxo pipefail
+          make -j"$(nproc)" TARGET=NightClock cia
+          test -s NightClock.3dsx
+          test -s NightClock.cia
+
+      - name: Upload builds
+        uses: actions/upload-artifact@v4
+        with:
+          name: NightClock-3DS
+          path: |
+            NightClock.3dsx
+            NightClock.cia
+          if-no-files-found: error
