@@ -35,6 +35,7 @@ APP_TITLE       := NightClock
 APP_AUTHOR      := Michele P.
 APP_DESCRIPTION := A Relaxing Night Clock
 ICON            := icon.png
+BUILD_NUMBER    ?= 0
 
 TARGET          := $(notdir $(CURDIR))
 BUILD           := build
@@ -55,7 +56,7 @@ CFLAGS  := -g -Wall -O2 -mword-relocations \
            -ffunction-sections \
            $(ARCH)
 
-CFLAGS  += $(INCLUDE) -D__3DS__
+CFLAGS  += $(INCLUDE) -D__3DS__ -DNIGHTCLOCK_BUILD_NUMBER=$(BUILD_NUMBER)
 
 CXXFLAGS        := $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
 

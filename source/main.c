@@ -10,6 +10,12 @@
 #include <string.h>
 #include <sys/stat.h>
 
+#ifndef NIGHTCLOCK_BUILD_NUMBER
+#define NIGHTCLOCK_BUILD_NUMBER 0
+#endif
+#define STRINGIFY_DETAIL(value) #value
+#define STRINGIFY(value) STRINGIFY_DETAIL(value)
+
 #define STAR_COUNT       80
 #define SHOOT_MAX         12  
 #define CLOUD_COUNT       7
@@ -1560,6 +1566,12 @@ static void drawBottomScreen(C2D_TextBuf buf, C3D_RenderTarget* target) {
             mainTimerTextX0 = (320.0f-tw)*0.5f; mainTimerTextX1 = mainTimerTextX0 + tw;
             mainTimerTextY0 = mainAlarmBottomY;  mainTimerTextY1 = mainAlarmBottomY + th;
         }
+
+        C2D_Text buildText;
+        C2D_TextParse(&buildText, buf, "Build #" STRINGIFY(NIGHTCLOCK_BUILD_NUMBER));
+        C2D_TextOptimize(&buildText);
+        C2D_TextGetDimensions(&buildText, 0.50f, 0.50f, &tw, &th);
+        C2D_DrawText(&buildText, C2D_WithColor, (320.0f - tw) * 0.5f, 115.0f, 0.5f, 0.50f, 0.50f, colWhite);
 
         float bw, bh;
         // Riga superiore: Notes (sinistra), Calendar (destra)

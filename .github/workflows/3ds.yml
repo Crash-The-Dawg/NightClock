@@ -41,14 +41,15 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          make -j"$(nproc)" TARGET=NightClock cia
+          make -j"$(nproc)" TARGET=NightClock BUILD_NUMBER="$GITHUB_RUN_NUMBER" cia
           test -s NightClock.3dsx
           test -s NightClock.cia
+          "$DEVKITARM/bin/arm-none-eabi-strings" NightClock.elf | grep -Fx "Build #$GITHUB_RUN_NUMBER"
 
       - name: Upload builds
         uses: actions/upload-artifact@v4
         with:
-          name: NightClock-3DS
+          name: NightClock-3DS-build-${{ github.run_number }}
           path: |
             NightClock.3dsx
             NightClock.cia
