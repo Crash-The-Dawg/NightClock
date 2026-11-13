@@ -15,7 +15,7 @@ To test on a 3DS:
 
 Speaker output, continued rendering and audio initialization have not yet been verified for this use. The alarm will not run after the app is closed, while it is suspended in the HOME menu, or while the console is powered off.
 
-On a New 2DS XL, the earlier test build `f2e5b00` produced no speaker sound with the lid closed and rang immediately after opening. The later build removes display synchronization while an alarm is active; its closed-lid behavior still needs hardware testing.
+On a New 2DS XL, the earlier test build `f2e5b00` produced no speaker sound with the lid closed and rang immediately after opening. Build 4 also produced no closed-lid speaker sound; after opening, the alarm popup was active. Headphones were unavailable for testing. Build 5 explicitly selects stereo output, as in the reference player; its closed-lid behavior still needs hardware testing.
 
 Hello, my name is Michele, let me introduce my first app for Nintendo 3ds (all models).
 It has been in development by me since June 5th 2026 and tested on Citra and on my own Nintendo 3ds XL.
