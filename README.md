@@ -1,5 +1,20 @@
 # NightClock
 A relaxing clock app for Nintendo 3ds called NightClock.
+
+## Experimental closed-lid alarm
+
+This feature is not yet verified on physical hardware. Do not rely on it as your only alarm.
+When an alarm is enabled, NightClock prevents system sleep while the app remains in the foreground. This is not true standby and consumes more battery; keep the console charged. Normal sleep is allowed again when the alarm is disabled or stopped. The timer does not prevent sleep.
+
+To test on a 3DS:
+1. Set the system clock and volume, remove any headphones, and leave NightClock running in the foreground.
+2. Set an alarm a few minutes ahead and close the lid before it is due.
+3. Check whether the built-in speakers ring repeatedly; open the lid and stop the alarm.
+4. Repeat with headphones and note the console model and results for both tests.
+5. Disable the alarm and check that closing the lid allows normal sleep.
+
+Speaker output, continued rendering and audio initialization have not yet been verified for this use. The alarm will not run after the app is closed, while it is suspended in the HOME menu, or while the console is powered off.
+
 Hello, my name is Michele, let me introduce my first app for Nintendo 3ds (all models).
 It has been in development by me since June 5th 2026 and tested on Citra and on my own Nintendo 3ds XL.
 I love to keep my New 3ds XL switched on while I work at my desktop or while I watch tv so had the Idea to create a relaxing clock app full of features.

@@ -4,7 +4,7 @@
 
 - [x] 1.1 Add a GitHub Actions workflow that builds 3DSX and CIA and verify both artifacts are uploaded by a successful run.
 - [ ] 1.2 Prevent sleep while an alarm is enabled or ringing and verify normal sleep is allowed otherwise; build with GitHub Actions.
-- [ ] 1.3 Document the experimental hardware test, power implications, foreground requirement and unverified speaker behavior; review the instructions against the test build.
+- [x] 1.3 Document the experimental hardware test, power implications, foreground requirement and unverified speaker behavior; review the instructions against the test build.
 - [ ] 1.4 Test on a physical 3DS with the lid closed, first without headphones and then with headphones, and record the results and device model.
 
 ## 2. Reliable Alarm
