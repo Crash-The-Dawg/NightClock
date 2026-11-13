@@ -9,11 +9,13 @@ When an alarm is enabled, NightClock prevents system sleep while the app remains
 To test on a 3DS:
 1. Set the system clock and volume, remove any headphones, and leave NightClock running in the foreground.
 2. Set an alarm a few minutes ahead and close the lid before it is due.
-3. Check whether the built-in speakers ring repeatedly; open the lid and stop the alarm.
-4. Repeat with headphones and note the console model and results for both tests.
+3. Listen for the alarm through the closed lid, then keep it closed until at least two minutes after the alarm time. Open the lid and check whether the alarm popup is already active.
+4. Repeat with headphones and note the console model, whether sound played with the lid closed, and whether the alarm popup appeared after opening.
 5. Disable the alarm and check that closing the lid allows normal sleep.
 
 Speaker output, continued rendering and audio initialization have not yet been verified for this use. The alarm will not run after the app is closed, while it is suspended in the HOME menu, or while the console is powered off.
+
+On a New 2DS XL, the earlier test build `f2e5b00` produced no speaker sound with the lid closed and rang immediately after opening. The later build removes display synchronization while an alarm is active; its closed-lid behavior still needs hardware testing.
 
 Hello, my name is Michele, let me introduce my first app for Nintendo 3ds (all models).
 It has been in development by me since June 5th 2026 and tested on Citra and on my own Nintendo 3ds XL.
