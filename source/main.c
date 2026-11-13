@@ -3105,7 +3105,11 @@ int main() {
         globalAnimTime += 0.0166f; 
 
         /* ---------- TOP SCREEN ---------- */
-        C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+        bool alarmKeepsAwake = alarmCfg.enabled || (alarmRinging && !ringSourceIsTimer);
+        if (!C3D_FrameBegin(alarmKeepsAwake ? C3D_FRAME_NONBLOCK : C3D_FRAME_SYNCDRAW)) {
+            if (alarmKeepsAwake) svcSleepThread(16666667);
+            continue;
+        }
         C2D_TargetClear(top, C2D_Color32(0, 0, 0, 255));
         C2D_SceneBegin(top);
         C2D_TextBufClear(topBuf);
@@ -3129,6 +3133,7 @@ int main() {
         drawBottomScreen(bottomBuf, bottom);
 
         C3D_FrameEnd(C3D_FRAME_SYNCDRAW);
+        if (alarmKeepsAwake) svcSleepThread(16666667);
     }
 
     aptSetSleepAllowed(true);
