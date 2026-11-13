@@ -585,6 +585,7 @@ static bool initAudio() {
         }
     }
 
+    ndspSetOutputMode(NDSP_OUTPUT_STEREO);
     ndspChnReset(0);
     ndspChnSetInterp(0, NDSP_INTERP_LINEAR);
     ndspChnSetRate(0, (float)BEEP_SAMPLE_RATE);
